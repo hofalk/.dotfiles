@@ -1,0 +1,16 @@
+[submodule ".config/zsh/custom/plugins/zsh-autosuggestions"]
+	path = .config/zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".config/zsh/custom/plugins/zsh-completions"]
+	path = .config/zsh/custom/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule ".config/zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = .config/zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".config/base16-shell"]
+	path = .config/base16-shell
+	url = https://github.com/chriskempson/base16-shell
+[submodule ".config/zsh/custom/themes/powerlevel10k"]
+	path = .config/zsh/custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
+
