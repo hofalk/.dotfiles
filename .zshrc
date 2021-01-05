@@ -51,9 +51,6 @@ ZSH_WEB_SEARCH_ENGINES=(
     amazon "https://www.amazon.de/s?k="
 )
 
-
-
-
 # Completions
 [[ -f "$ZSH_CONFIG/completion.zsh" ]] \
     && source "$ZSH_CONFIG/completion.zsh"
