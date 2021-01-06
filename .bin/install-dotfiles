@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+REPO_DIR=$HOME/.dotfiles
+BAK_DIR=$REPO_DIR.bak
+WORK_DIR=$HOME
+set -x
+
+REPO_DIR=$HOME/test/.dotfiles
+BAK_DIR=$REPO_DIR.bak
+WORK_DIR=$HOME/test
+
+unset reply
+echo -n "[1;97mInstall dotfiles at [1;91m${REPO_DIR}[1;97m with work dir [1;91m${WORK_DIR}[1;97m? [yN] [0m"
+read -r reply
+if [[ ! $reply =~ ^[Yy]$ ]]; then
+    echo 'Aborted.'
+    exit
+fi
+
+dotfiles="/usr/bin/env git --git-dir=$REPO_DIR --work-tree=$WORK_DIR"
+
+# Highlighting for output
+highlight() {
+    echo "[1;34m::[0m [1m$*[0m"
+}
+
+# Clone dotfiles repo
+highlight 'Clone gh://h0lk/.dotfiles'
+git clone --bare https://github.com/h0lk/.dotfiles \
+    "$REPO_DIR"
+
+$dotfiles checkout
+if [ "$?" -ne 0 ]; then
+    mkdir -p "$BAK_DIR"
+    $dotfiles checkout 2>&1 \
+        | grep -P '^\s+[\w.]' \
+        | awk {'print $1'} \
+        | xargs -I{} sh -c "cp -r --parents \"{}\" \"$BAK_DIR\" && rm -rf \"{}\""
+    $dotfiles checkout
+fi
+
+# Load submodules
+highlight 'Initialize submodules'
+$dotfiles submodule update --init --remote --recursive --depth 1
+
+# ignore untracked files -- after all work dir is the users home directory
+highlight 'Ignore untracked files'
+$dotfiles config --local status.showUntrackedFiles no
+
