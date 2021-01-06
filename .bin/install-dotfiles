@@ -2,11 +2,6 @@
 REPO_DIR=$HOME/.dotfiles
 BAK_DIR=$REPO_DIR.bak
 WORK_DIR=$HOME
-set -x
-
-REPO_DIR=$HOME/test/.dotfiles
-BAK_DIR=$REPO_DIR.bak
-WORK_DIR=$HOME/test
 
 unset reply
 echo -n "[1;97mInstall dotfiles at [1;91m${REPO_DIR}[1;97m with work dir [1;91m${WORK_DIR}[1;97m? [yN] [0m"
