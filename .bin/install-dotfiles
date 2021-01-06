@@ -21,7 +21,7 @@ highlight() {
 
 # Clone dotfiles repo
 highlight 'Clone gh://h0lk/.dotfiles'
-git clone --bare https://github.com/h0lk/.dotfiles \
+git clone --bare git@github.com:h0lk/.dotfiles.git \
     "$REPO_DIR"
 
 $dotfiles checkout
