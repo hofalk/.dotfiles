@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
+
 REPO_DIR=$HOME/.dotfiles
 BAK_DIR=$REPO_DIR.bak
 WORK_DIR=$HOME
 
-unset reply
-echo -n "[1;97mInstall dotfiles at [1;91m${REPO_DIR}[1;97m with work dir [1;91m${WORK_DIR}[1;97m? [yN] [0m"
-read -r reply
-if [[ ! $reply =~ ^[Yy]$ ]]; then
-    echo 'Aborted.'
-    exit
-fi
+# unset reply
+# echo -n "[1;97mInstall dotfiles at [1;91m${REPO_DIR}[1;97m with work dir [1;91m${WORK_DIR}[1;97m? [yN] [0m"
+# read -r reply
+# if [[ ! $reply =~ ^[Yy]$ ]]; then
+#     echo 'Aborted.'
+#     exit
+# fi
 
 dotfiles="/usr/bin/env git --git-dir=$REPO_DIR --work-tree=$WORK_DIR"
 
