@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="displays" version="1.0">
+  <property name="ActiveProfile" type="string" value="e83249bd3ba79932e16fb1fb5100dafade9954c2"/>
+  <property name="Default" type="empty">
+    <property name="eDP-1" type="string" value="Laptop">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="ee7d793198482486f6bac314ab2b496ab13b9a58"/>
+      <property name="Resolution" type="string" value="1920x1080"/>
+      <property name="RefreshRate" type="double" value="60.020425"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-1" type="string" value="Dell Inc. 32&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="788fc89b27652a268e326193a9764efde6924e80"/>
+      <property name="Resolution" type="string" value="2560x1440"/>
+      <property name="RefreshRate" type="double" value="59.950550"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="true"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="1920"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-2" type="string" value="Samsung Electric Company 22&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="5644e297b50f1f49a70de097b757bfcb8e668aad"/>
+      <property name="Resolution" type="string" value="1680x1050"/>
+      <property name="RefreshRate" type="double" value="59.883253"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="4480"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+  </property>
+  <property name="Fallback" type="empty">
+    <property name="eDP-1" type="string" value="Laptop">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="ee7d793198482486f6bac314ab2b496ab13b9a58"/>
+      <property name="Resolution" type="string" value="1920x1080"/>
+      <property name="RefreshRate" type="double" value="60.020425"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-1" type="string" value="Dell Inc. 32&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="788fc89b27652a268e326193a9764efde6924e80"/>
+      <property name="Resolution" type="string" value="2560x1440"/>
+      <property name="RefreshRate" type="double" value="59.950550"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="true"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="1920"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-2" type="string" value="Samsung Electric Company 22&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="5644e297b50f1f49a70de097b757bfcb8e668aad"/>
+      <property name="Resolution" type="string" value="1680x1050"/>
+      <property name="RefreshRate" type="double" value="59.883253"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="4480"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+  </property>
+  <property name="Notify" type="bool" value="true"/>
+  <property name="AutoEnableProfiles" type="bool" value="true"/>
+  <property name="e83249bd3ba79932e16fb1fb5100dafade9954c2" type="string" value="home">
+    <property name="eDP-1" type="string" value="Laptop">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="ee7d793198482486f6bac314ab2b496ab13b9a58"/>
+      <property name="Resolution" type="string" value="1920x1080"/>
+      <property name="RefreshRate" type="double" value="60.020425"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-1" type="string" value="Dell Inc. 32&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="788fc89b27652a268e326193a9764efde6924e80"/>
+      <property name="Resolution" type="string" value="2560x1440"/>
+      <property name="RefreshRate" type="double" value="59.950550"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="true"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="1920"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+    <property name="DP-3-2" type="string" value="Samsung Electric Company 22&quot;">
+      <property name="Active" type="bool" value="true"/>
+      <property name="EDID" type="string" value="5644e297b50f1f49a70de097b757bfcb8e668aad"/>
+      <property name="Resolution" type="string" value="1680x1050"/>
+      <property name="RefreshRate" type="double" value="59.883253"/>
+      <property name="Rotation" type="int" value="0"/>
+      <property name="Reflection" type="string" value="0"/>
+      <property name="Primary" type="bool" value="false"/>
+      <property name="Position" type="empty">
+        <property name="X" type="int" value="4480"/>
+        <property name="Y" type="int" value="0"/>
+      </property>
+    </property>
+  </property>
+</channel>
