@@ -11,8 +11,10 @@
       <property name="icon-size" type="uint" value="16"/>
       <property name="size" type="uint" value="33"/>
       <property name="plugin-ids" type="array">
+        <value type="int" value="28"/>
         <value type="int" value="7"/>
         <value type="int" value="27"/>
+        <value type="int" value="29"/>
         <value type="int" value="15"/>
         <value type="int" value="3"/>
         <value type="int" value="20"/>
@@ -108,5 +110,11 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-27" type="string" value="separator"/>
+    <property name="plugin-28" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-29" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
   </property>
 </channel>
