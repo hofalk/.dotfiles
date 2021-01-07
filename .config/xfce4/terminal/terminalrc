@@ -26,7 +26,7 @@ MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=TRUE
 MiscNewTabAdjacent=FALSE
 MiscSearchDialogOpacity=100
-MiscShowUnsafePasteDialog=TRUE
+MiscShowUnsafePasteDialog=FALSE
 ColorForeground=#CBCED0
 ColorBackground=#1C1E26
 ColorPalette=#1C1E26;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#CBCED0;#6F6F70;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#E3E6EE
@@ -35,4 +35,5 @@ DropdownOpacity=85
 DropdownAlwaysShowTabs=FALSE
 ColorCursor=x
 ColorBoldIsBright=FALSE
+DropdownKeepOpenDefault=TRUE
 

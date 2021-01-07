@@ -1,0 +1,262 @@
+[[snippets]]
+  description = "archive files last modified over a month ago"
+  command = "find . -maxdepth 1 -mtime +30 -type f -exec mv \"{}\" ./_dump \\;"
+  tag = ["find", "archive"]
+  output = ""
+
+[[snippets]]
+  description = "check for all kubernetes api-resources within given namespace"
+  command = "kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found -n <namespace=default>"
+  tag = ["kubectl", "get", "all"]
+  output = ""
+
+[[snippets]]
+  description = "remove finalizers from resource"
+  command = "kubectl patch <type> <name> -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
+  tag = ["kubectl", "patch", "finalizers"]
+  output = ""
+
+[[snippets]]
+  description = "suspend kubernetes cronjob"
+  command = "kubectl patch cronjob <name=dev-smarttrack-cron-master> -p '{\"spec\" : {\"suspend\" : <value=true> }}'"
+  tag = ["kubectl", "patch", "cronjob", "suspend"]
+  output = ""
+
+[[snippets]]
+  description = "add container admin rolebinding for google group in cluster"
+  command = "gcloud projects add-iam-policy-binding <cluster=prod-uk> --member=group:<group=cloud-dev@aspera.com> --role=roles/container.admin"
+  tag = ["gcloud", "iam", "policy", "cloud-dev", "admin"]
+  output = ""
+
+[[snippets]]
+  description = "recreate statefulset to allow for metadata changes (helm3 upgrade)"
+  command = "kubectl delete -n <namespace> --cascade=false statefulset <ss-name> && helm upgrade -n <namespace> <release> <chart> --reuse-values"
+  tag = ["helm", "helm3", "statefulset", "update"]
+  output = ""
+
+[[snippets]]
+  description = "copy secret from one namespace to another"
+  command = "kubectl get secret <secret> --namespace=<from-ns> --export -o yaml | kubectl apply --namespace=<to-ns> -f -"
+  tag = ["kubectl", "secret", "copy"]
+  output = ""
+
+[[snippets]]
+  description = "create generic kubernetes secret from file"
+  command = "kubectl create secret -n <namespace> generic <name> --from-file=<file=key.json>"
+  tag = ["kubectl", "create", "secret", "from-file"]
+  output = ""
+
+[[snippets]]
+  description = "decode base64 value from kubernetes secret"
+  command = "kubectl get secret <name> -ojsonpath={\".data['<key>']\"} | base64 --decode"
+  tag = ["kubectl", "base64", "decode", "secret"]
+  output = ""
+
+[[snippets]]
+  description = "decode x509 tls certificate from kubernetes secret"
+  command = "kubectl get secret <name> -ojsonpath={\".data['tls\\.crt']\"} | base64 --decode  | openssl x509 -in /dev/stdin -text -noout"
+  tag = ["kubectl", "secret", "tls", "openssl", "decode", "x509"]
+  output = ""
+
+[[snippets]]
+  description = "run kubernetes pod to execute a command inside a given image once"
+  command = "kubectl run <name=example> -i -t --rm --restart=Never --image <iamge=centos:7> -- <command=curl -s http://ipinfo.io/ip>"
+  tag = ["kubectl", "run", "pod", "command", "once"]
+  output = ""
+
+[[snippets]]
+  description = "create kubernetes secret from tls key and certificate file"
+  command = "kubectl create secret generic <name=cloud-aspera-com-tls> -n <namespace> --from-file=<keyfile=./tls.key> --from-file=<crtfile=./tls.crt>"
+  tag = ["kubectl", "secret", "tls", "key", "crt"]
+  output = ""
+
+[[snippets]]
+  description = "prune failed kubernetes jobs in given namespace"
+  command = "kubectl delete jobs.batch --field-selector status.successful==0 -n <namespace>"
+  tag = ["kubectl", "delete", "jobs", "failed"]
+  output = ""
+
+[[snippets]]
+  description = "show only given field from json logs in kubernetes pod"
+  command = "kubectl logs <pod> | jq -R -r 'fromjson? | .<field=message> '"
+  tag = ["kubectl", "logs", "json", "jq"]
+  output = ""
+
+[[snippets]]
+  description = "show size of bucket in current gcloud project with gsutil"
+  command = "gsutil du -sh gs://<bucket=asp-metrics>/"
+  tag = ["gsutil", "gcloud", "bucket", "size"]
+  output = ""
+
+[[snippets]]
+  description = "Get leader node for kubernetes controller manager"
+  command = "kubectl -n kube-system get endpoints kube-controller-manager -o jsonpath='{.metadata.annotations.control-plane\\.alpha\\.kubernetes\\.io/leader}'"
+  tag = ["kubectl", "endpoints", "kube-controller-manager"]
+  output = ""
+
+[[snippets]]
+  description = "Get leader node for kubernetes scheduler"
+  command = "kubectl -n kube-system get endpoints kube-scheduler -o jsonpath='{.metadata.annotations.control-plane\\.alpha\\.kubernetes\\.io/leader}'"
+  tag = ["kubectl", "endpoints", "kube-scheduler"]
+  output = ""
+
+[[snippets]]
+  description = "decrypt cipher text from file with google kms cryptokey for cloud_build"
+  command = "gcloud kms decrypt --key=projects/ad-itdevmore-prod-platform-de/locations/global/keyRings/cloud_build/cryptoKeys/cloud_build --location=global --ciphertext-file=./crypt --plaintext-file=./decrypt.txt"
+  output = ""
+
+[[snippets]]
+  description = "echo x509 certificate from server by name"
+  command = "echo | openssl s_client -showcerts -servername <server=rancher.aspera.usu.grp> -connect <server>:443 2>/dev/null | openssl x509 -inform pem -noout -text"
+  tag = ["openssl", "cert", "x509"]
+  output = ""
+
+[[snippets]]
+  description = "show open connections and running commands on microsoft sqlserver"
+  command = "sp_who;"
+  tag = ["sql", "mssql", "sqlsrv", "who"]
+  output = ""
+
+[[snippets]]
+  description = "reset argocd password"
+  command = "kubectl patch secret argocd-secret  -p '{\"data\": {\"admin.password\": null, \"admin.passwordMtime\": null}}'"
+  output = ""
+
+[[snippets]]
+  description = "create kubernetes secret as local file"
+  command = "echo -n <value=bar> | kubectl create secret generic <name=mysecret> --dry-run=client --from-file=<key=foo>=/dev/stdin -o <format=json> > <name=mysecret>.<format=json>"
+  output = ""
+
+[[snippets]]
+  description = "replace all occurences of a domain name by a new one, e.g. inside database sql dump file"
+  command = "sed -i -E 's|http(s)?://(\\w.)?<old=tv-roetgen.de>|<new=http://localhost>|g' <file>"
+  tag = ["sed,replace,domain,sql,dump"]
+  output = ""
+
+[[snippets]]
+  description = "find vsphere vms by name and output only name for loop"
+  command = "govc find vm -name \"adk8s-internal*\" | cut -d / -f 3"
+  output = ""
+
+[[snippets]]
+  description = "Retrieve MySQL/MariaDB SQL dump from kubernetes deployment"
+  command = "kubectl exec <mysqlpod=smarttrack-mariadb-0> -- mysqldump -u <user=root> -p<password=3xtr3m3ly-s3cr3t> <db=smarttrack> > <file=dump.sql>"
+  tag = ["kubectl,mysql,mariadb,mysqldump"]
+  output = ""
+
+[[snippets]]
+  description = "restart php-fpm inside docker container forcing reload of config"
+  command = "docker exec compose_app_1 kill -USR2 1"
+  output = ""
+
+[[snippets]]
+  description = "reload nginx configuration in docker container"
+  command = "docker exec <container=compose_nginx_1> nginx -s reload"
+  tag = ["nginx,docker,config,reload"]
+  output = ""
+
+[[snippets]]
+  description = "diff values between of two helm revisions"
+  command = "vimdiff <(helm get values <release=trial-smarttrack> -o yaml --revision <revision_left=1>) <(helm get values <release=trial-smarttrack> -o yaml --revision <revision_right=2>)"
+  tag = ["helm,diff,values"]
+  output = ""
+
+[[snippets]]
+  description = "Run debugging container in current kubernetes context and namespace"
+  command = "kubectl run --rm -it sak --image=leodotcloud/swiss-army-knife -- bash"
+  tag = ["debug,swiss-army-knife,kubectl,run"]
+  output = ""
+
+[[snippets]]
+  description = "get external ips from all nodes in current kubernetes cluster"
+  command = "kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type==\"ExternalIP\")].address}'"
+  output = ""
+
+[[snippets]]
+  description = "run ansible command on all cluster nodes in curent kubernetes context"
+  command = "ANSIBLE_HOST_KEY_CHECKING=false ansible all -i `kubectl get nodes -o jsonpath='{range .items[*]}{.status.addresses[?(@.type==\"ExternalIP\")].address},{end}'` -oa \"cat /etc/adk8s_template\""
+  output = ""
+
+[[snippets]]
+  description = "bulk patch delete finalizers in kubernetes resources"
+  command = "for i in `kubectl get node.management.cattle.io -o name`; do kubectl patch  $i -p '{\"metadata\":{\"finalizers\":[]}}' --type='merge';done"
+  output = ""
+
+[[snippets]]
+  description = "Add velero backup-volumes annotation to all pods of a specific label"
+  command = "kubectl annotate pod -n rocketchat --selector=release=rocketchat,app=mongodb backup.velero.io/backup-volumes=datadir --overwrite"
+  tag = ["velero,backup,volume,annotate,kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "get TLS certificate of server through openssl"
+  command = "echo | openssl s_client -showcerts -servername asp.k8s.aspera.usu.grp:443 -connect asp.k8s.aspera.usu.grp:443 2>/dev/null | openssl x509 -inform pem -noout -text"
+  output = ""
+
+[[snippets]]
+  description = "find latest modification date inside a folder"
+  command = "find <folder=.> -type f -exec stat {} --printf=\"%y\\n\" \\; | sort -n -r | head -n 1 | cut -d\" \" -f1"
+  tag = ["find,date,modification"]
+  output = ""
+
+[[snippets]]
+  description = "rename all folders by prefixing the iso date of the last modification of a file inside them"
+  command = "for dir in `find . -maxdepth 1 -type d | grep -vE \"^(\\.$|./[_0-9])\"`; do mv $dir `find $dir -type f -exec stat {} --printf=\"%y\\n\" \\; | sort -n -r | head -n 1 | cut -d\" \" -f1`-${dir:2}; done"
+  tag = ["find,mv,rename,bulk"]
+  output = ""
+
+[[snippets]]
+  description = "run local docker phpldapadmin server to connect and browse aspera active directory server (ads)"
+  command = "docker run -p 6443:443 --env PHPLDAPADMIN_LDAP_HOSTS=ads.aspera.usu.grp --detach osixia/phpldapadmin:0.9.0"
+  tag = ["ldap,ad,phpldapadmin,docker"]
+  output = ""
+
+[[snippets]]
+  description = "get aspera webserver certificate from nexus"
+  command = "wget https://nexus-int.aspera.usu.grp/repository/certificates/aspera/aspera-intermediate-g2-sha256.crt"
+  tag = ["crt,ca,intermediate,wget,aspera"]
+  output = ""
+
+[[snippets]]
+  description = "copy local file to inventory group of remote hosts through ansible ad-hoc command"
+  command = "ansible -i ci_hosts.yml jenkins_slaves -bK -m copy -a \"src=./cacerts dest=/etc/ssl/certs/java/cacerts owner=root group=root mode=0644\""
+  tag = ["ansible,copy,cacerts,java"]
+  output = ""
+
+[[snippets]]
+  description = "extract contents from named docker volume as tar gzip archive to local directory"
+  command = "docker run --rm -v compose_uploads-data:/volume -v $(pwd):/backup alpine tar -czf /backup/volume.tar.gz -C /volume ./"
+  tag = ["docker,volume,backup"]
+  output = ""
+
+[[snippets]]
+  description = "count commits per folder since specific date"
+  command = "for dir in `echo build tests htdocs include`; do echo -n \"$dir :\" &&git log --pretty=oneline --abbrev-commit --after=2020-01-01 --date=short -- $dir/ | wc -l; done"
+  output = ""
+
+[[snippets]]
+  description = "show resolve status for all network interfaces"
+  command = "sudo systemd-resolve --status"
+  output = ""
+
+[[snippets]]
+  description = "export realm to json file inside jboss keycloak docker container or kubernetes pod"
+  command = "/opt/jboss/keycloak/bin/standalone.sh -Djboss.socket.binding.port-offset=100 -Dkeycloak.migration.action=export -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.realmName=adp -Dkeycloak.migration.usersExportStrategy=REALM_FILE -Dkeycloak.migration.file=/tmp/adp.json"
+  tag = ["keycloak,export,realm,docker,kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "create generic kubernetes secret with kubectl and openssl"
+  command = "kubectl create secret generic my-secret --from-literal=password=\"$(openssl rand -base64 12 | tr -d '\\n')\""
+  tag = ["secret,create,kubectl,openssl,rand,password"]
+  output = ""
+
+[[snippets]]
+  description = "create secret with openssl and kubectl and output it as yaml to stdout"
+  command = "kubectl create secret generic my-secret --from-literal=password=\"$(openssl rand -base64 12 | tr -d '\\n')\" --dry-run=client -o yaml"
+  output = ""
+
+[[snippets]]
+  description = "create bootable usb drive from img file"
+  command = "sudo dd bs=4M if=./Boot-HardDisk.img of=/dev/sda conv=fdatasync status=progress"
+  output = ""

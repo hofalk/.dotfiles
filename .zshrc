@@ -77,11 +77,7 @@ ZSH_WEB_SEARCH_ENGINES=(
 #  USER CONFIGURATION  #
 ########################
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='vim'
 
 # Base16 Shell # not working
 BASE16_SHELL="$HOME/.config/base16-shell/"
