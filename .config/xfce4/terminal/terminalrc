@@ -27,10 +27,12 @@ MiscSlimTabs=TRUE
 MiscNewTabAdjacent=FALSE
 MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=TRUE
-ColorForeground=#000000
-ColorBackground=#ffffff
-ColorPalette=#000000;#cd0000;#00cd00;#cdcd00;#0000cd;#cd00cd;#00cdcd;#e5e5e5;#7f7f7f;#ff0000;#00ff00;#ffff00;#5c5cff;#ff00ff;#00ffff;#ffffff
+ColorForeground=#CBCED0
+ColorBackground=#1C1E26
+ColorPalette=#1C1E26;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#CBCED0;#6F6F70;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#E3E6EE
 DropdownWidth=100
 DropdownOpacity=85
 DropdownAlwaysShowTabs=FALSE
+ColorCursor=x
+ColorBoldIsBright=FALSE
 
