@@ -93,6 +93,15 @@ if [ -d ~/.kube/configs ]; then
   fi
 fi
 
+# kubeconfig per session
+file="$(mktemp -t "kubectx.XXXXXX")"
+export KUBECONFIG="${file}:${KUBECONFIG}"
+cat <<EOF >"${file}"
+apiVersion: v1
+kind: Config
+current-context: ""
+EOF
+
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
