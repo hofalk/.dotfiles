@@ -100,16 +100,7 @@ fi
 
 
 # aliases
-#alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-#compdef dotfiles=git
 
-# alias gh="xdg-open `git remote -v | awk '/fetch/{print $2}' | sed -re 's#(git@|git://)#http://#' -e 's@com:@com/@'`| head -n1"
-alias stacko='web_search stackoverflow'
-alias gcp="gcloud config set project"
-alias aci="ansible -i ~a/ci_hosts.yml"
-alias qc="copyq copy -"
-alias qp="copyq clipboard"
-alias kcfg="export KUBECONFIG="
 function ide() { idea "$@" > /dev/null 2>&1 & }
 function cc () { export KUBECONFIG=~/git/infra/gitops-kubernetes-cluster/cluster/$1/infra/output/kubeconfig.yaml }
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
