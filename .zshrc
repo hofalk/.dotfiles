@@ -100,8 +100,8 @@ fi
 
 
 # aliases
-alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-compdef dotfiles=git
+#alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+#compdef dotfiles=git
 
 # alias gh="xdg-open `git remote -v | awk '/fetch/{print $2}' | sed -re 's#(git@|git://)#http://#' -e 's@com:@com/@'`| head -n1"
 alias stacko='web_search stackoverflow'

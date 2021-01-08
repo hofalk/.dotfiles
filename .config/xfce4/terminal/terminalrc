@@ -36,4 +36,5 @@ DropdownAlwaysShowTabs=FALSE
 ColorCursor=x
 ColorBoldIsBright=FALSE
 DropdownKeepOpenDefault=TRUE
+TitleMode=TERMINAL_TITLE_REPLACE
 
