@@ -1,0 +1,44 @@
+k9s:
+  refreshRate: 2
+  maxConnRetry: 5
+  enableMouse: false
+  headless: false
+  crumbsless: false
+  readOnly: false
+  noIcons: true
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: 60
+    fullScreenLogs: false
+    textWrap: false
+    showTime: false
+  currentContext: usu-integration
+  currentCluster: usu-integration
+  clusters:
+    usu-integration:
+      namespace:
+        active: mariadb
+        favorites:
+        - mariadb
+        - all
+        - cert-manager
+        - default
+      view:
+        active: pods mariadb
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 90
+      warn: 70

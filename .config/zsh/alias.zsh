@@ -3,6 +3,7 @@
 #############
 
 alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dotpush="dotfiles commit -am \"update\" && dotfiles push"
 compdef dotfiles=git
 
 # go to parent
@@ -159,16 +160,6 @@ bak() {
         echo "Found: $1.bak"
         mv "$1"{.bak,}
     fi
-}
-
-lsp-prep() {
-    (cd build && cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON) \
-        && ln -sf build/compile_commands.json
-}
-
-toggle() {
-    kitty @ set-colors --configured --all ~/.config/kitty/gruvbox-light.conf
-    source ~/.config/zsh/custom/themes/gruvbox-light.zsh-theme
 }
 
 

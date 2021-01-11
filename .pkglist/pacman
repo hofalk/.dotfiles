@@ -11,6 +11,7 @@ git-lfs
 gzip
 htop
 jre8-openjdk
+k9s
 keepassxc
 kubectx
 less
