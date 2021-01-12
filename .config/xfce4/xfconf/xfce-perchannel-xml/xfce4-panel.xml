@@ -58,6 +58,8 @@
       <property name="show-frame" type="bool" value="false"/>
       <property name="square-icons" type="bool" value="true"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="task manager"/>
+        <value type="string" value="notes"/>
         <value type="string" value="drop-down terminal"/>
         <value type="string" value="remmina"/>
         <value type="string" value="clipman"/>
@@ -139,6 +141,14 @@
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
         <property name="never-confirm-history-clear" type="bool" value="false"/>
+      </property>
+    </property>
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="tabs-position" type="int" value="1"/>
+      </property>
+      <property name="new-window" type="empty">
+        <property name="always-on-top" type="bool" value="true"/>
       </property>
     </property>
   </property>

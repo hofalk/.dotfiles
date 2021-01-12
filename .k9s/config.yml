@@ -16,16 +16,50 @@ k9s:
   currentContext: usu-integration
   currentCluster: usu-integration
   clusters:
+    adp-staging:
+      namespace:
+        active: all
+        favorites:
+        - all
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    gke_asp-staging_europe-west1-b_sandbox:
+      namespace:
+        active: staging
+        favorites:
+        - staging
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
     usu-integration:
       namespace:
-        active: mariadb
+        active: all
         favorites:
         - mariadb
         - all
         - cert-manager
         - default
       view:
-        active: pods mariadb
+        active: pods
       featureGates:
         nodeShell: false
       shellPod:
