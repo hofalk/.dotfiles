@@ -102,6 +102,8 @@ kind: Config
 current-context: ""
 EOF
 
+alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
+
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
