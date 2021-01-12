@@ -103,7 +103,8 @@ current-context: ""
 EOF
 
 alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
-
+alias dotstat='dotfiles status'
+alias dotpush='dotfiles commit -am "update" && dotfiles push'
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
