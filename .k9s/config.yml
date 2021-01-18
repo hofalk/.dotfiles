@@ -52,14 +52,14 @@ k9s:
       portForwardAddress: localhost
     usu-integration:
       namespace:
-        active: all
+        active: cert-manager
         favorites:
         - mariadb
         - all
         - cert-manager
         - default
       view:
-        active: pods
+        active: pods cert-manager
       featureGates:
         nodeShell: false
       shellPod:

@@ -260,3 +260,8 @@
   description = "create bootable usb drive from img file"
   command = "sudo dd bs=4M if=./Boot-HardDisk.img of=/dev/sda conv=fdatasync status=progress"
   output = ""
+
+[[snippets]]
+  description = "test certificate issuing with vault and aspera ca intermediate"
+  command = "vault write -format=json aspera-ca-intermediate/issue/test common_name=test.aspera.usu.grp | jq -M '.data.certificate' | sed 's/\"//g' | sed 's/\\\\n/\\n/g' | openssl x509 -in /dev/stdin -text -noout"
+  output = ""
