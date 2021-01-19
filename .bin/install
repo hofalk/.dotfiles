@@ -1,0 +1,59 @@
+#!/bin/bash
+#set -x
+
+######################
+### helper
+######################
+
+_docs() {
+  echo "Downloads and installs binaries"
+  echo ""
+  echo "Usage:"
+  echo "  $0 COMMAND [arguments]"
+  echo ""
+  echo "Arguments: cli arguments to pass through for COMMANDs that allow/expect it"
+  echo ""
+  echo "Commands:"
+  cat $0 | grep -E "^[^_]\S+\(\) {.*" | sed -E 's/(.*)\(\) \{( # (.*))?/  - \1: \3/' | sort -n
+  echo ""
+}
+
+_curl_temp() {
+  url=${1?Function_needs_argument}
+ 
+}
+
+_fn_exists() {
+  type $1 2>/dev/null | grep -q 'is a function'
+}
+
+######################
+### commands
+######################
+
+gcloud() { # [target=~] install google-cloud-sdk to $target/google-cloud-sdk diretcotry
+  target_dir=${1:-~}
+  gcloud_dir="$target_dir/google-cloud-sdk"
+  [ -d $gcloud_dir ] && rm -rf $gcloud_dir
+  curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-323.0.0-linux-x86_64.tar.gz | tar xz -C $target_dir
+  $gcloud_dir/install.sh # --quiet
+}
+
+######################
+### execute
+######################
+
+# print help
+if [ "$1" == "--help" ] || [ $# -eq 0 ]; then
+  _docs && exit 0
+fi
+
+COMMAND=$1
+shift
+ARGUMENTS=${@}
+
+if _fn_exists $COMMAND; then
+  $COMMAND $ARGUMENTS
+else
+  echo "unknown command: $COMMAND" && _docs && exit 1
+fi
