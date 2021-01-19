@@ -38,6 +38,7 @@ for REVISION in $(helm history -n "$NAMESPACE" "$RELEASE" | tail -n +2 | awk '{p
         "$RELEASE" > "$REVISION_DIR/manifest.yaml"
 
     helm get values \
+        -o yaml
 		-n "$NAMESPACE" \
         --revision "$REVISION" \
         "$RELEASE" > "$REVISION_DIR/values.yaml"
