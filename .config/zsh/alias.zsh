@@ -4,6 +4,7 @@
 
 alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias dotpush="dotfiles commit -am \"update\" && dotfiles push"
+alias dotdiff="dotfiles difftool"
 compdef dotfiles=git
 
 # go to parent

@@ -1,0 +1,9 @@
+[user]
+	email = holger.falk@aspera.com
+	name = Holger Falk
+[core]
+	autocrlf = input
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
