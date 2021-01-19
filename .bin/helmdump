@@ -1,0 +1,48 @@
+#!/bin/bash
+set -x
+
+RELEASE="$1"
+NAMESPACE="$2"
+TMP_DIR=$(mktemp -d)
+
+if [[ -z "$RELEASE" ]]; then
+    echo "Missing release param"
+    exit 1
+fi
+
+if [[ -z "$NAMESPACE" ]]; then
+echo "No Namespace specified, assuming '$RELEASE'"
+    NAMESPACE="$RELEASE"
+fi
+
+RELEASE_LOGFILE=$TMP_DIR/${RELEASE}.log
+
+echo -n "KUBE_CONTEXT: " > $RELEASE_LOGFILE
+kubectl config current-context >> $RELEASE_LOGFILE
+
+echo "DATE: $(date)" >> $RELEASE_LOGFILE
+echo "RELEASE: ${RELEASE}" >> $RELEASE_LOGFILE
+echo "NAMESPACE: ${NAMESPACE}" >> $RELEASE_LOGFILE
+
+echo "HISTORY: " >> $RELEASE_LOGFILE
+helm history -n "$NAMESPACE" "$RELEASE" >> $RELEASE_LOGFILE
+
+for REVISION in $(helm history -n "$NAMESPACE" "$RELEASE" | tail -n +2 | awk '{print $1}'); do
+    
+    REVISION_DIR=$TMP_DIR/$(printf "%02d" $REVISION)
+    mkdir $REVISION_DIR
+
+    helm get manifest \
+		-n "$NAMESPACE" \
+        --revision "$REVISION" \
+        "$RELEASE" > "$REVISION_DIR/manifest.yaml"
+
+    helm get values \
+		-n "$NAMESPACE" \
+        --revision "$REVISION" \
+        "$RELEASE" > "$REVISION_DIR/values.yaml"
+
+done
+
+echo "Manifests located in '$TMP_DIR'"
+

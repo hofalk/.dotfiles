@@ -1,0 +1,167 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# CLUSTER=(
+# gke_ad-itdevmore-prod-platform-de_europe-west3-a_playground
+# gke_asp-staging_europe-west1-b_sandbox
+# gke_ad-itdevmore-prod-platform-de_europe-west1-b_integration-tests
+# gke_ad-itdevmore-prod-platform-de_europe-west3-a_ci
+# gke_ad-itdevmore-prod-platform-us_us-central1-a_prod-us
+# gke_ad-itdevmore-trial-platform-us_us-central1-a_trial-us
+# gke_asp-prod-asia_asia-northeast1-a_asp-prod-asia
+# gke_asp-prod-de_europe-west3-a_asp-prod-de
+# gke_asp-prod-eu_europe-west1-b_asp-prod-eu
+# gke_asp-trial-eu_europe-west1-b_asp-trial-eu
+# gke_asp-trial-uk_europe-west2-a_asp-trial-uk
+# gke_prod-uk_europe-west2-a_prod-uk
+# # eu-prod-aks
+# )
+
+#debugging
+#set -x
+
+CLUSTER=(
+gke-playground
+gke-sandbox
+gke-integration-tests
+gke-ci
+gke-prod-us
+gke-trial-us
+gke-prod-asia
+gke-prod-de
+gke-prod-eu
+gke-trial-eu
+gke-trial-uk
+gke-prod-uk
+gke-strife
+#rke-prod
+#eu-prod-aks
+)
+
+function h()
+{
+    # eval $(printf "%s %q " "$hctx $@")
+    $hctx $@
+}
+
+function k()
+{
+    # eval $(printf "%s %q " "$kctx $@")
+    $kctx $@
+}
+
+function failed-pods()
+{
+    $kctx get pods -A --field-selector status.phase=Failed
+}
+
+function write-navarch-configs()
+{
+    navarch ls --kube-context $ctx > $ctx.yaml
+}
+
+function helm-ls() 
+{
+    $hctx ls 
+}
+
+function upgrade-helm() 
+{
+    $hctx init --service-account tiller --upgrade
+}
+
+function cm-verify() {
+    ns=${1:-default}
+    secret=${2:-cluster-cert-tls}
+    $kctx get secrets -n $ns $secret -ojsonpath={".data['tls\.crt']"} | base64 --decode  | openssl x509 -text -noout | grep -A 4 "Issuer:"
+}
+
+function cm-upgrade() {
+    # check https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html
+    version=${1?Function_needs_argument}
+    $kctx apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-$version/deploy/manifests/00-crds.yaml
+    $kctx create namespace cert-manager
+    $hctx upgrade --install \
+        cert-manager \
+        --namespace cert-manager \
+        --version $version \
+        jetstack/cert-manager
+
+        echo "NOTE: don't forget to update ClusterIssuer and Certificate if necessary"
+}
+
+function cm-delete() {
+    # check https://docs.cert-manager.io/en/latest/tasks/uninstall/kubernetes.html 
+    version=${1?Function_needs_argument}
+    $kctx delete Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces --all
+    $hctx delete --purge cert-manager
+    $kctx delete namespace cert-manager
+    $kctx delete -f https://raw.githubusercontent.com/jetstack/cert-manager/release-$version/deploy/manifests/00-crds.yaml
+}
+
+function which()
+{
+    printf "%s\n" "${CLUSTER[@]}"
+}
+
+function cert-orders()
+{
+    # echo "cert-orders with: $@"
+    $kctx describe orders.certmanager.k8s.io | tail -n20
+}
+
+# POSITIONAL=()
+# while [[ $# -gt 0 ]]
+# do
+# key="$1"
+
+# case $key in
+#     -e|--extension)
+#     EXTENSION="$2"
+#     shift # past argument
+#     shift # past value
+#     ;;
+#     -s|--searchpath)
+#     SEARCHPATH="$2"
+#     shift # past argument
+#     shift # past value
+#     ;;
+#     -l|--lib)
+#     LIBPATH="$2"
+#     shift # past argument
+#     shift # past value
+#     ;;
+#     --default)
+#     DEFAULT=YES
+#     shift # past argument
+#     ;;
+#     *)    # unknown option
+#     POSITIONAL+=("$1") # save it in an array for later
+#     shift # past argument
+#     ;;
+# esac
+# done
+# set -- "${POSITIONAL[@]}" # restore positional parameters
+
+
+if ! [ `type -t $1`"" == 'function' ] ; then
+    echo "unknown command '$1'"
+    exit 1
+fi
+fn=$1;shift
+
+if [ "$fn" == "which" ]; then
+    $fn && exit
+fi
+
+for ctx in "${CLUSTER[@]}"; do
+# for ctx in `kubectl config get-contexts -o=name`; do
+    kctx="kubectl --context $ctx"
+    hctx="helm --kube-context $ctx"
+
+    echo -e "${GREEN}====== $ctx${NC}"
+    $fn $@
+done

@@ -191,7 +191,7 @@ if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ad
 
 
 # exports
-export PATH=$PATH:/home/adihfalk/bin:/home/adihfalk/.local/bin
+export PATH=$PATH:/home/adihfalk/.bin:/home/adihfalk/.local/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # TMUX
