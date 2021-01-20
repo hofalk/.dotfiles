@@ -77,6 +77,7 @@ ZSH_WEB_SEARCH_ENGINES=(
 #  USER CONFIGURATION  #
 ########################
 
+set -o vi
 export EDITOR='vim'
 
 # Base16 Shell # not working
