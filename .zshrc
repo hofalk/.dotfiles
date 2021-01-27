@@ -119,7 +119,7 @@ function cc () { export KUBECONFIG=~/git/infra/gitops-kubernetes-cluster/cluster
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 # function pgdir() { PGDIR=`date +%F`-$1; mkdir -p ~pg/$PGDIR; cd ~pg/$PGDIR }
-function wsdir() { mkdir -p ~ws/$PGDIR; cd ~ws/$PGDIR }
+function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
 
 ## ansible shortcut functions
 function aci () { ansible -i ~a/ci_hosts.yml $1 -k $@ }
