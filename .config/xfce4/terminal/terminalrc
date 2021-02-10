@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Source Code Pro Semi-Bold 11
+FontName=Source Code Pro Bold 11
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
@@ -32,10 +32,11 @@ ColorBackground=#1C1E26
 ColorPalette=#1C1E26;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#CBCED0;#6F6F70;#E93C58;#EFAF8E;#EFB993;#DF5273;#B072D1;#24A8B4;#E3E6EE
 DropdownWidth=100
 DropdownOpacity=85
-DropdownAlwaysShowTabs=FALSE
 ColorCursor=x
 ColorBoldIsBright=FALSE
-DropdownKeepOpenDefault=TRUE
 TitleMode=TERMINAL_TITLE_REPLACE
-ColorUseTheme=TRUE
+DropdownToggleFocus=FALSE
+DropdownAlwaysShowTabs=FALSE
+TextBlinkMode=TERMINAL_TEXT_BLINK_MODE_NEVER
+DropdownKeepOpenDefault=TRUE
 
