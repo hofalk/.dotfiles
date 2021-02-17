@@ -79,6 +79,8 @@ ZSH_WEB_SEARCH_ENGINES=(
 
 set -o vi
 export EDITOR='vim'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
 
 # Base16 Shell # not working
 BASE16_SHELL="$HOME/.config/base16-shell/"
@@ -128,6 +130,18 @@ function aruno () { ansible -i ~a/ci_hosts.yml $1 -ok -m shell -a "$2" ${@:3} }
 function arunx () { set -x; ansible -i ~a/ci_hosts.yml $1 -k -m shell -a "$2" ${@:3} }
 function apb () { ansible-playbook -i ~a/ci_hosts.yml -kbK ~a/playbooks/$1.yml ${@:2} }
 function apbc () { ansible-playbook -i ~a/ci_hosts.yml -kbKC ~a/playbooks/$1.yml ${@:2} }
+function clicolors() {
+    i=1
+    for color in {000..255}; do;
+        c=$c"$FG[$color]$color✔$reset_color  ";
+        if [ `expr $i % 8` -eq 0 ]; then
+            c=$c"\n"
+        fi
+        i=`expr $i + 1`
+    done;
+    echo $c | sed 's/%//g' | sed 's/{//g' | sed 's/}//g' | sed '$s/..$//';
+    c=''
+}
 
 # pet
 function prev() {
@@ -189,8 +203,6 @@ if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
 
-
-
 # exports
 export PATH=$PATH:/home/adihfalk/.bin:/home/adihfalk/.local/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -199,7 +211,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 local main_attached="$(tmux list-sessions -F '#S #{session_attached}' \
     2>/dev/null \
     | sed -n 's/^main[[:space:]]//p')"
-if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]]; then
+if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]] && [[ ! "${TERMINAL_EMULATOR}" =~ .*JetBrains.* ]]; then
     tmux new -A -s main >/dev/null 2>&1
     exit
 fi
