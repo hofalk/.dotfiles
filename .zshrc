@@ -115,9 +115,7 @@ alias dotpush='dotfiles commit -am "update" && dotfiles push'
 
 
 # aliases
-
-function ide() { idea "$@" > /dev/null 2>&1 & }
-function cc () { export KUBECONFIG=~/git/infra/gitops-kubernetes-cluster/cluster/$1/infra/output/kubeconfig.yaml }
+function ssh () { command ssh -t "${@}" 'bash -o vi' }
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 # function pgdir() { PGDIR=`date +%F`-$1; mkdir -p ~pg/$PGDIR; cd ~pg/$PGDIR }
@@ -202,6 +200,8 @@ if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
+# temporary workaround for bug in gcloud: https://issuetracker.google.com/issues/166482953
+export CLOUDSDK_PYTHON=python2
 
 # exports
 export PATH=$PATH:/home/adihfalk/.bin:/home/adihfalk/.local/bin
