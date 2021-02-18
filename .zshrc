@@ -108,6 +108,7 @@ EOF
 alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
 alias dotstat='dotfiles status'
 alias dotpush='dotfiles commit -am "update" && dotfiles push'
+alias sid='~stc/sid'
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
@@ -157,34 +158,34 @@ zle -N pet-select
 bindkey '^s' pet-select
 
 # dir hashes
-hash -d g=~/git/
-hash -d h=~/git/helm/
-hash -d c=~/git/cloud/
+hash -d g=~/git
+hash -d h=~/git/helm
+hash -d c=~/git/cloud
 
-hash -d i=~/git/infra/
-hash -d a=~/git/infra/ansible/
+hash -d i=~/git/infra
+hash -d a=~/git/infra/ansible
 
-hash -d s=~/git/stuff/
-hash -d dot=~/git/stuff/dot/
-hash -d heap=~/git/stuff/_heap/
-hash -d ws=~/git/stuff/_heap/workspaces/
-hash -d dump=~/git/stuff/_heap/_dump/
+hash -d s=~/git/stuff
+hash -d dot=~/git/stuff/dot
+hash -d heap=~/git/stuff/_heap
+hash -d ws=~/git/stuff/_heap/workspaces
+hash -d dump=~/git/stuff/_heap/_dump
 
-hash -d tf=~/git/cloud/terraform/
+hash -d tf=~/git/cloud/terraform
 
-hash -d st=~/git/smarttrack/
-hash -d sta=~/git/smarttrack/app/
-hash -d stc=~/git/smarttrack/compose/
-hash -d sth=~/git/helm/smarttrack-helm-charts/
+hash -d st=~/git/smarttrack
+hash -d sta=~/git/smarttrack/app
+hash -d stc=~/git/smarttrack/compose
+hash -d sth=~/git/helm/smarttrack-helm-charts
 
-hash -d adp=~/git/adp/
-hash -d adpf=~/git/adp/adp-frontend/
-hash -d adpb=~/git/adp/adp-backend/
+hash -d adp=~/git/adp
+hash -d adpf=~/git/adp/adp-frontend
+hash -d adpb=~/git/adp/adp-backend
 
-hash -d pg=~/playground/
-hash -d ng=~/playground/angular/
+hash -d pg=~/playground
+hash -d ng=~/playground/angular
 
-hash -d dl=~/Downloads/
+hash -d dl=~/Downloads
 
 # completion
 source <(kubectl completion zsh)
