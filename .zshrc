@@ -108,7 +108,7 @@ EOF
 alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
 alias dotstat='dotfiles status'
 alias dotpush='dotfiles commit -am "update" && dotfiles push'
-alias sid='~stc/sid'
+alias sid='~sid/sid'
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
@@ -175,7 +175,7 @@ hash -d tf=~/git/cloud/terraform
 
 hash -d st=~/git/smarttrack
 hash -d sta=~/git/smarttrack/app
-hash -d stc=~/git/smarttrack/compose
+hash -d sid=~/git/smarttrack/compose
 hash -d sth=~/git/helm/smarttrack-helm-charts
 
 hash -d adp=~/git/adp
