@@ -179,8 +179,9 @@ hash -d sid=~/git/smarttrack/compose
 hash -d sth=~/git/helm/smarttrack-helm-charts
 
 hash -d adp=~/git/adp
-hash -d adpf=~/git/adp/adp-frontend
-hash -d adpb=~/git/adp/adp-backend
+hash -d adpf=~/git/adp/frontend
+hash -d adpb=~/git/adp/backend
+hash -d adpb=~/git/adp/helm-chart
 
 hash -d pg=~/playground
 hash -d ng=~/playground/angular
@@ -217,3 +218,7 @@ if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]] && [[ ! "${TERMINA
     exit
 fi
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

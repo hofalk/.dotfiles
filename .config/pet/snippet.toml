@@ -174,7 +174,7 @@
 
 [[snippets]]
   description = "run ansible command on all cluster nodes in curent kubernetes context"
-  command = "ANSIBLE_HOST_KEY_CHECKING=false ansible all -i `kubectl get nodes -o jsonpath='{range .items[*]}{.status.addresses[?(@.type==\"ExternalIP\")].address},{end}'` -oa \"cat /etc/adk8s_template\""
+  command = "ANSIBLE_HOST_KEY_CHECKING=false ansible all -i `kubectl get nodes -o jsonpath='{range .items[*]}{.status.addresses[?(@.type==\"ExternalIP\")].address},{end}'` -oa \"sh -c 'hostname; cat /etc/adk8s_template | tail -n1 | cut -d: -f2'\""
   output = ""
 
 [[snippets]]
