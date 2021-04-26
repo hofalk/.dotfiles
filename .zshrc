@@ -109,6 +109,7 @@ alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > 
 alias dotstat='dotfiles status'
 alias dotpush='dotfiles commit -am "update" && dotfiles push'
 alias sid='~sid/sid'
+alias pass='keepassxc-cli'
 
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \

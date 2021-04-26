@@ -13,17 +13,18 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: usu-integration
-  currentCluster: usu-integration
+  currentContext: adp-staging
+  currentCluster: adp-staging
   clusters:
     adp-staging:
       namespace:
-        active: all
+        active: argocd
         favorites:
+        - argocd
         - all
         - default
       view:
-        active: pod
+        active: pod argocd
       featureGates:
         nodeShell: false
       shellPod:
