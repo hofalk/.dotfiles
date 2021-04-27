@@ -13,8 +13,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: adp-staging
-  currentCluster: adp-staging
+  currentContext: local
+  currentCluster: local
   clusters:
     adp-staging:
       namespace:
@@ -42,6 +42,23 @@ k9s:
         - default
       view:
         active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    local:
+      namespace:
+        active: cattle-system
+        favorites:
+        - cattle-system
+        - default
+      view:
+        active: po cattle-system
       featureGates:
         nodeShell: false
       shellPod:

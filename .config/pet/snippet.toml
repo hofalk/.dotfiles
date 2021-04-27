@@ -275,3 +275,8 @@
   description = "extract dump from postgres database running in kubernetes cluster"
   command = "kubectl exec pascal-postgres-lc4cloud-postgresql-0 -- bash -c \"PGPASSWORD='E6r4tZgvkCmny7QdSJk1KO-1TxfYV-mVgfQPyJkLhzo' pg_dump -U lc4cloud-backend lc4cloud-backend\" > database.sql"
   output = ""
+
+[[snippets]]
+  description = "show configured controlplane nodes for all worker nodes in a rancher rke cluster with ansible, kubectl and docker"
+  command = "ANSIBLE_HOST_KEY_CHECKING=false ansible all -i `kubectl get nodes -l node-role.kubernetes.io/worker=\"true\" -o jsonpath='{range .items[*]}{.status.addresses[?(@.type==\"ExternalIP\")].address},{end}'` -bK -oa \"sh -c 'hostname; sudo docker inspect nginx-proxy | grep -m 1 CP_HOSTS'\""
+  output = ""
