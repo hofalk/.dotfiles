@@ -13,8 +13,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: local
-  currentCluster: local
+  currentContext: asp
+  currentCluster: asp
   clusters:
     adp-staging:
       namespace:
@@ -25,6 +25,23 @@ k9s:
         - default
       view:
         active: pod argocd
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    asp:
+      namespace:
+        active: lufthansa-customer
+        favorites:
+        - lufthansa-customer
+        - default
+      view:
+        active: po lufthansa-customer
       featureGates:
         nodeShell: false
       shellPod:
@@ -59,6 +76,23 @@ k9s:
         - default
       view:
         active: po cattle-system
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    prod:
+      namespace:
+        active: ""
+        favorites:
+        - all
+        - default
+      view:
+        active: po default
       featureGates:
         nodeShell: false
       shellPod:
