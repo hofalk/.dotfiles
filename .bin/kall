@@ -24,6 +24,12 @@ NC='\033[0m' # No Color
 #set -x
 
 CLUSTER=(
+adp-staging
+asp
+internal
+sandbox
+prod
+usu-integration
 gke-playground
 gke-sandbox
 gke-integration-tests

@@ -123,6 +123,32 @@ function mcd () { mkdir -p $1; cd $1 }
 # function pgdir() { PGDIR=`date +%F`-$1; mkdir -p ~pg/$PGDIR; cd ~pg/$PGDIR }
 function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
 
+function hval() {
+  local release="${1}-customer"
+  local key="${2}"
+
+  local values=`helm get values -o yaml -n "${release}" "${release}"`
+  if [ -z "${key}" ]; then
+    echo $values
+  else
+    case $key in
+      'cau' )
+        search='keycloak.customerAdminUser'
+        ;;
+      'cap' )
+        search='keycloak.customerAdminPassword'
+        ;;
+      'kc' )
+        search='keycloak.password'
+        ;;
+      default )
+        search="${key}"
+        ;;
+    esac
+    echo $values | yq r - "${search}"
+  fi
+}
+
 ## ansible shortcut functions
 function aci () { ansible -i ~a/ci_hosts.yml $1 -k $@ }
 function arun () { ansible -i ~a/ci_hosts.yml $1 -k -m shell -a "$2" ${@:3} }

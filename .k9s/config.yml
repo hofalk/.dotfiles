@@ -3,6 +3,7 @@ k9s:
   maxConnRetry: 5
   enableMouse: false
   headless: false
+  logoless: false
   crumbsless: false
   readOnly: false
   noIcons: true
@@ -29,6 +30,8 @@ k9s:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
@@ -36,16 +39,19 @@ k9s:
       portForwardAddress: localhost
     asp:
       namespace:
-        active: lufthansa-customer
+        active: cattle-monitoring-system
         favorites:
+        - cattle-monitoring-system
         - lufthansa-customer
         - default
       view:
-        active: po lufthansa-customer
+        active: po cattle-monitoring-system
       featureGates:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
@@ -63,6 +69,8 @@ k9s:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
@@ -80,6 +88,8 @@ k9s:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
@@ -97,6 +107,8 @@ k9s:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
@@ -116,6 +128,8 @@ k9s:
         nodeShell: false
       shellPod:
         image: busybox:1.31
+        command: []
+        args: []
         namespace: default
         limits:
           cpu: 100m
