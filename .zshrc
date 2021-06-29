@@ -49,6 +49,7 @@ plugins=(
   kubectl
   web-search
   bgnotify
+  asdf
 )
 
 # Remove plugins if in tty
@@ -208,7 +209,7 @@ hash -d sth=~/git/helm/smarttrack-helm-charts
 hash -d adp=~/git/adp
 hash -d adpf=~/git/adp/frontend
 hash -d adpb=~/git/adp/backend
-hash -d adpb=~/git/adp/helm-chart
+hash -d adph=~/git/adp/helm-chart
 
 hash -d pg=~/playground
 hash -d ng=~/playground/angular
