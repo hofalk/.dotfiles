@@ -1,7 +1,6 @@
 ###########
 #  ZSHRC  #
 ###########
-
 export ZSH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH_CONFIG/custom"
@@ -234,7 +233,7 @@ if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ad
 export CLOUDSDK_PYTHON=python2
 
 # exports
-export PATH=$PATH:/home/adihfalk/.bin:/home/adihfalk/.local/bin
+export PATH=$PATH:/home/adihfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # TMUX
@@ -245,8 +244,3 @@ if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]] && [[ ! "${TERMINA
     tmux new -A -s main >/dev/null 2>&1
     exit
 fi
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

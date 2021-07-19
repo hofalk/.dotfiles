@@ -14,8 +14,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: asp
-  currentCluster: asp
+  currentContext: gke-ci
+  currentCluster: gke_ad-itdevmore-prod-platform-de_europe-west3-a_ci
   clusters:
     adp-staging:
       namespace:
@@ -46,6 +46,27 @@ k9s:
         - default
       view:
         active: po cattle-monitoring-system
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    gke_ad-itdevmore-prod-platform-de_europe-west3-a_ci:
+      namespace:
+        active: concourse-deployment
+        favorites:
+        - monitoring
+        - all
+        - concourse-deployment
+        - default
+      view:
+        active: sec
       featureGates:
         nodeShell: false
       shellPod:
