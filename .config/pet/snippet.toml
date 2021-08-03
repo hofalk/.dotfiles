@@ -280,3 +280,8 @@
   description = "show configured controlplane nodes for all worker nodes in a rancher rke cluster with ansible, kubectl and docker"
   command = "ANSIBLE_HOST_KEY_CHECKING=false ansible all -i `kubectl get nodes -l node-role.kubernetes.io/worker=\"true\" -o jsonpath='{range .items[*]}{.status.addresses[?(@.type==\"ExternalIP\")].address},{end}'` -bK -oa \"sh -c 'hostname; sudo docker inspect nginx-proxy | grep -m 1 CP_HOSTS'\""
   output = ""
+
+[[snippets]]
+  description = "patch all applications and appprojects of argocd to remove finalizers and allowing for cluster or namespace termination through terraform destroy"
+  command = "k get application,appproject -o name | xargs -d '\\n' -n1 kubectl patch  -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
+  output = ""

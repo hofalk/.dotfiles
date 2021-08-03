@@ -14,8 +14,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: gke-ci
-  currentCluster: gke_ad-itdevmore-prod-platform-de_europe-west3-a_ci
+  currentContext: internal
+  currentCluster: internal
   clusters:
     adp-staging:
       namespace:
@@ -97,6 +97,24 @@ k9s:
           cpu: 100m
           memory: 100Mi
       portForwardAddress: localhost
+    internal:
+      namespace:
+        active: default
+        favorites:
+        - default
+      view:
+        active: po
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
     local:
       namespace:
         active: cattle-system
@@ -124,6 +142,24 @@ k9s:
         - default
       view:
         active: po default
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    sandbox:
+      namespace:
+        active: default
+        favorites:
+        - default
+      view:
+        active: po
       featureGates:
         nodeShell: false
       shellPod:
