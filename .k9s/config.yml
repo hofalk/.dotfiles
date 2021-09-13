@@ -14,18 +14,19 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: internal
-  currentCluster: internal
+  currentContext: sandbox
+  currentCluster: sandbox
   clusters:
     adp-staging:
       namespace:
-        active: argocd
+        active: cattle-system
         favorites:
+        - cattle-system
         - argocd
         - all
         - default
       view:
-        active: pod argocd
+        active: pod
       featureGates:
         nodeShell: false
       shellPod:
@@ -39,8 +40,9 @@ k9s:
       portForwardAddress: localhost
     asp:
       namespace:
-        active: cattle-monitoring-system
+        active: ""
         favorites:
+        - all
         - cattle-monitoring-system
         - lufthansa-customer
         - default
@@ -67,6 +69,24 @@ k9s:
         - default
       view:
         active: sec
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    gke_ad-itdevmore-prod-platform-de_europe-west3-a_playground:
+      namespace:
+        active: longhorn-system
+        favorites:
+        - default
+      view:
+        active: pod
       featureGates:
         nodeShell: false
       shellPod:
@@ -155,8 +175,10 @@ k9s:
       portForwardAddress: localhost
     sandbox:
       namespace:
-        active: default
+        active: longhorn-system
         favorites:
+        - longhorn-system
+        - all
         - default
       view:
         active: po
@@ -173,14 +195,16 @@ k9s:
       portForwardAddress: localhost
     usu-integration:
       namespace:
-        active: cert-manager
+        active: usm-staging-shop
         favorites:
-        - mariadb
+        - usm-staging-shop
+        - metallb
+        - argocd
         - all
         - cert-manager
         - default
       view:
-        active: pods cert-manager
+        active: "no"
       featureGates:
         nodeShell: false
       shellPod:
