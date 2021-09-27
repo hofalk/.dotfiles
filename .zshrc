@@ -96,14 +96,20 @@ if [ -d ~/.kube/configs ]; then
   fi
 fi
 
-# kubeconfig per session
-file="$(mktemp -t "kubectx.XXXXXX")"
-export KUBECONFIG="${file}:${KUBECONFIG}"
-cat <<EOF >"${file}"
+# kubeconfig per session & init with context of last session if available
+KUBECONFIG_LAST_CTX=`ls -t /tmp | grep kubectx | head -n 1`
+KUBECONFIG_NEXT_CTX="$(mktemp -t "kubectx.XXXXXX")"
+export KUBECONFIG="${KUBECONFIG_NEXT_CTX}:${KUBECONFIG}"
+if [ -z "$KUBECONFIG_LAST_CTX" ]
+then
+     cat <<EOF >"${KUBECONFIG_NEXT_CTX}"
 apiVersion: v1
 kind: Config
 current-context: ""
 EOF
+else
+  cp "/tmp/${KUBECONFIG_LAST_CTX}" "${KUBECONFIG_NEXT_CTX}"
+fi
 
 alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
 alias dotstat='dotfiles status'

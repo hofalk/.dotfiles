@@ -14,8 +14,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: sandbox
-  currentCluster: sandbox
+  currentContext: asp
+  currentCluster: asp
   clusters:
     adp-staging:
       namespace:
@@ -40,14 +40,17 @@ k9s:
       portForwardAddress: localhost
     asp:
       namespace:
-        active: ""
+        active: archy
         favorites:
+        - archy
+        - axelspringer-customer
+        - volvo-customer
         - all
         - cattle-monitoring-system
         - lufthansa-customer
         - default
       view:
-        active: po cattle-monitoring-system
+        active: pods
       featureGates:
         nodeShell: false
       shellPod:
@@ -117,6 +120,26 @@ k9s:
           cpu: 100m
           memory: 100Mi
       portForwardAddress: localhost
+    gke_asp-trial-uk_europe-west2-a_asp-trial-uk:
+      namespace:
+        active: archy
+        favorites:
+        - archy
+        - ingress-nginx
+        - default
+      view:
+        active: pods
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
     internal:
       namespace:
         active: default
@@ -175,9 +198,10 @@ k9s:
       portForwardAddress: localhost
     sandbox:
       namespace:
-        active: longhorn-system
+        active: argocd
         favorites:
-        - longhorn-system
+        - argocd
+        - kube-system
         - all
         - default
       view:
