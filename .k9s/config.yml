@@ -14,8 +14,8 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: rke-usu-integration
-  currentCluster: usu-integration
+  currentContext: aws-sandbox
+  currentCluster: aws-sandbox
   clusters:
     adp-staging:
       namespace:
@@ -48,6 +48,26 @@ k9s:
         - all
         - cattle-monitoring-system
         - lufthansa-customer
+        - default
+      view:
+        active: pods
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    aws-sandbox:
+      namespace:
+        active: ingress-nginx
+        favorites:
+        - ingress-nginx
+        - argocd
         - default
       view:
         active: pods
@@ -161,25 +181,6 @@ k9s:
           cpu: 100m
           memory: 100Mi
       portForwardAddress: localhost
-    local:
-      namespace:
-        active: cattle-system
-        favorites:
-        - cattle-system
-        - default
-      view:
-        active: po cattle-system
-      featureGates:
-        nodeShell: false
-      shellPod:
-        image: busybox:1.31
-        command: []
-        args: []
-        namespace: default
-        limits:
-          cpu: 100m
-          memory: 100Mi
-      portForwardAddress: localhost
     prod:
       namespace:
         active: saasopdemo-customer
@@ -202,14 +203,16 @@ k9s:
       portForwardAddress: localhost
     sandbox:
       namespace:
-        active: argocd
+        active: usu-scdf
         favorites:
+        - usu-customer
+        - usu-scdf
         - argocd
         - kube-system
         - all
         - default
       view:
-        active: po
+        active: pods
       featureGates:
         nodeShell: false
       shellPod:

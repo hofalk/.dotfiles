@@ -77,7 +77,7 @@ ZSH_WEB_SEARCH_ENGINES=(
 #  USER CONFIGURATION  #
 ########################
 
-set -o vi
+# set -o vi
 export EDITOR='vim'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
@@ -111,6 +111,7 @@ else
   cp "/tmp/${KUBECONFIG_LAST_CTX}" "${KUBECONFIG_NEXT_CTX}"
 fi
 
+alias ls='exa'
 alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
 alias dotstat='dotfiles status'
 alias dotpush='dotfiles commit -am "update" && dotfiles push'
@@ -123,7 +124,7 @@ alias pass='keepassxc-cli'
 
 
 # aliases
-function ssh () { command ssh -t "${@}" 'bash -o vi' }
+# function ssh () { command ssh -t "${@}" 'bash -o vi' }
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 # function pgdir() { PGDIR=`date +%F`-$1; mkdir -p ~pg/$PGDIR; cd ~pg/$PGDIR }
