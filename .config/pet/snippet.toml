@@ -285,3 +285,8 @@
   description = "patch all applications and appprojects of argocd to remove finalizers and allowing for cluster or namespace termination through terraform destroy"
   command = "k get application,appproject -o name | xargs -d '\\n' -n1 kubectl patch  -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
   output = ""
+
+[[snippets]]
+  description = "Show status of all git projects beneath current folder to detect uncommitted local changes"
+  command = "find . -type d -name '.git' | while read dir ; do sh -c \"cd $dir/../ && echo -e \\\"\\nGIT STATUS IN ${dir//\\.git/}\\\" && git status -s\" ; done\\n"
+  output = ""
