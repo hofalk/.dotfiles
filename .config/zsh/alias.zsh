@@ -3,7 +3,7 @@
 #############
 
 alias dots="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias dotpush="dots commit -am \"update\" && dotfiles push"
+alias dotpush="dots commit -am \"update\" && dots push"
 alias dotdiff="dots difftool"
 alias -g LS='| tr "\n" " "'
 compdef dotfiles=git
