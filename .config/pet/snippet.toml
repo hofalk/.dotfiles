@@ -288,5 +288,5 @@
 
 [[snippets]]
   description = "Show status of all git projects beneath current folder to detect uncommitted local changes"
-  command = "find . -type d -name '.git' | while read dir ; do sh -c \"cd $dir/../ && echo -e \\\"\\nGIT STATUS IN ${dir//\\.git/}\\\" && git status -s\" ; done\\n"
+  command = "find . -type d -name '.git' | while read dir ; do sh -c \"cd $dir/../ && echo -e \\\"\\nGIT STATUS IN ${dir//\\.git/}\\\" && git status -s\" ; done"
   output = ""

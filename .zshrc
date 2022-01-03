@@ -10,36 +10,6 @@ if [[ -d $ZSH_CUSTOM/themes/powerlevel10k ]]; then
     ZSH_THEME="powerlevel10k/powerlevel10k"
 fi
 
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# CASE_SENSITIVE="true"
-# HYPHEN_INSENSITIVE="true"
-# DISABLE_AUTO_UPDATE="true"
-# DISABLE_UPDATE_PROMPT="true"
-# export UPDATE_ZSH_DAYS=13
-# DISABLE_MAGIC_FUNCTIONS="true"
-# DISABLE_LS_COLORS="true"
-# DISABLE_AUTO_TITLE="true"
-# ENABLE_CORRECTION="true"
-# COMPLETION_WAITING_DOTS="true"
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-# HIST_STAMPS="mm/dd/yyyy"
-
-###############
-#  DIRCOLORS  #
-###############
-
-#####################
-#  PLUGIN SETTINGS  #
-#####################
-
-# bgnotify settings
-# bgnotify_threshold=2    ## set your own notification threshold
-# bgnotify_formatted() {
-#     ## $1=exit_status, $2=command, $3=elapsed_time
-#     [[ $1 -eq 0 ]] && title="Zsh" || title="Zsh (fail)"
-#     bgnotify "$title (${3}s)" "$2"
-# }
-
 plugins=(
   zsh-syntax-highlighting
   zsh-completions
@@ -79,14 +49,8 @@ ZSH_WEB_SEARCH_ENGINES=(
 
 # set -o vi
 export EDITOR='vim'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
-
-# Base16 Shell # not working
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 if [ -d ~/.kube/configs ]; then
   if [ -z "$KUBECONFIG_OVERRIDE" ]; then
@@ -111,70 +75,10 @@ else
   cp "/tmp/${KUBECONFIG_LAST_CTX}" "${KUBECONFIG_NEXT_CTX}"
 fi
 
-alias ls='exa'
-alias clipkube='export KUBECONFIG="$(mktemp -t "kubectx.XXXXXX")" && xclip -o > $KUBECONFIG'
-alias dotstat='dotfiles status'
-alias dotpush='dotfiles commit -am "update" && dotfiles push'
-alias sid='~sid/sid'
-alias pass='keepassxc-cli'
-
 # Aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
     && source "$ZSH_CONFIG/alias.zsh"
 
-
-# aliases
-# function ssh () { command ssh -t "${@}" 'bash -o vi' }
-function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
-function mcd () { mkdir -p $1; cd $1 }
-# function pgdir() { PGDIR=`date +%F`-$1; mkdir -p ~pg/$PGDIR; cd ~pg/$PGDIR }
-function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
-
-function hval() {
-  local release="${1}-customer"
-  local key="${2}"
-
-  local values=`helm get values -o yaml -n "${release}" "${release}"`
-  if [ -z "${key}" ]; then
-    echo $values
-  else
-    case $key in
-      'cau' )
-        search='keycloak.customerAdminUser'
-        ;;
-      'cap' )
-        search='keycloak.customerAdminPassword'
-        ;;
-      'kc' )
-        search='keycloak.password'
-        ;;
-      default )
-        search="${key}"
-        ;;
-    esac
-    echo $values | yq r - "${search}"
-  fi
-}
-
-## ansible shortcut functions
-function aci () { ansible -i ~a/ci_hosts.yml $1 -k $@ }
-function arun () { ansible -i ~a/ci_hosts.yml $1 -k -m shell -a "$2" ${@:3} }
-function aruno () { ansible -i ~a/ci_hosts.yml $1 -ok -m shell -a "$2" ${@:3} }
-function arunx () { set -x; ansible -i ~a/ci_hosts.yml $1 -k -m shell -a "$2" ${@:3} }
-function apb () { ansible-playbook -i ~a/ci_hosts.yml -kbK ~a/playbooks/$1.yml ${@:2} }
-function apbc () { ansible-playbook -i ~a/ci_hosts.yml -kbKC ~a/playbooks/$1.yml ${@:2} }
-function clicolors() {
-    i=1
-    for color in {000..255}; do;
-        c=$c"$FG[$color]$color✔$reset_color  ";
-        if [ `expr $i % 8` -eq 0 ]; then
-            c=$c"\n"
-        fi
-        i=`expr $i + 1`
-    done;
-    echo $c | sed 's/%//g' | sed 's/{//g' | sed 's/}//g' | sed '$s/..$//';
-    c=''
-}
 
 # pet
 function prev() {
@@ -224,20 +128,19 @@ hash -d dl=~/Downloads
 
 # completion
 source <(kubectl completion zsh)
-source <(velero completion zsh)
 source <(helm completion zsh)
 # source '/home/adihfalk/lib/azure-cli/az.completion'
 # source '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/path.zsh.inc'; fi
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
-# temporary workaround for bug in gcloud: https://issuetracker.google.com/issues/166482953
-export CLOUDSDK_PYTHON=python2
+# # The next line enables shell command completion for gcloud.
+# if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
+# # temporary workaround for bug in gcloud: https://issuetracker.google.com/issues/166482953
+# export CLOUDSDK_PYTHON=python2
 
 # exports
 export PATH=$PATH:/home/adihfalk/.bin

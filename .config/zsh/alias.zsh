@@ -2,11 +2,17 @@
 #  ALIASES  #
 #############
 
-alias dotfiles="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias dotpush="dotfiles commit -am \"update\" && dotfiles push"
-alias dotdiff="dotfiles difftool"
+alias dots="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dotpush="dots commit -am \"update\" && dotfiles push"
+alias dotdiff="dots difftool"
 alias -g LS='| tr "\n" " "'
 compdef dotfiles=git
+
+function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
+function mcd () { mkdir -p $1; cd $1 }
+function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
+
+### inherited:
 
 # go to parent
 alias ..='cd ..'
