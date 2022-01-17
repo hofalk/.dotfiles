@@ -19,6 +19,7 @@ plugins=(
   web-search
   bgnotify
   asdf
+  pyenv
 )
 
 # Remove plugins if in tty
@@ -97,24 +98,18 @@ bindkey '^s' pet-select
 
 # dir hashes
 hash -d g=~/git
-hash -d h=~/git/helm
-hash -d c=~/git/cloud
 
-hash -d i=~/git/infra
-hash -d a=~/git/infra/ansible
+hash -d a=~/git/ansible
 
 hash -d s=~/git/stuff
-hash -d dot=~/git/stuff/dot
 hash -d heap=~/git/stuff/_heap
 hash -d ws=~/git/stuff/_heap/workspaces
 hash -d dump=~/git/stuff/_heap/_dump
 
-hash -d tf=~/git/cloud/terraform
-
 hash -d st=~/git/smarttrack
 hash -d sta=~/git/smarttrack/app
 hash -d sid=~/git/smarttrack/compose
-hash -d sth=~/git/helm/smarttrack-helm-charts
+hash -d sth=~/git/smarttrack-helm-charts
 
 hash -d adp=~/git/adp
 hash -d adpf=~/git/adp/frontend
@@ -134,14 +129,6 @@ source <(helm completion zsh)
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
-# # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/path.zsh.inc'; fi
-
-# # The next line enables shell command completion for gcloud.
-# if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
-# # temporary workaround for bug in gcloud: https://issuetracker.google.com/issues/166482953
-# export CLOUDSDK_PYTHON=python2
-
 # exports
 export PATH=$PATH:/home/adihfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -154,3 +141,14 @@ if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]] && [[ ! "${TERMINA
     tmux new -A -s main >/dev/null 2>&1
     exit
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
+export CLOUDSDK_PYTHON=/usr/bin/python2
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
