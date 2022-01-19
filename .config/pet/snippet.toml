@@ -290,3 +290,9 @@
   description = "Show status of all git projects beneath current folder to detect uncommitted local changes"
   command = "find . -type d -name '.git' | while read dir ; do sh -c \"cd $dir/../ && echo -e \\\"\\nGIT STATUS IN ${dir//\\.git/}\\\" && git status -s\" ; done"
   output = ""
+
+[[snippets]]
+  description = "bulk delete resource through kubectl with filtering, e.g. to delete all namespaces following a naming schema"
+  command = "kubectl delete `kubectl get <type> -o name | grep <filter> | tr '\\n' ' '`"
+  tag = ["kubectl", "delete", "bulk"]
+  output = ""
