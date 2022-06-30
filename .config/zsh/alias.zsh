@@ -7,6 +7,8 @@ alias dotpush="dots commit -am \"update\" && dots push"
 alias dotdiff="dots difftool"
 alias sid="~sid/sid"
 alias -g LS='| tr "\n" " "'
+alias -g NEAT='| kubectl neat'
+alias -g DO='-o yaml --dry-run=client'
 compdef dotfiles=git
 
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }

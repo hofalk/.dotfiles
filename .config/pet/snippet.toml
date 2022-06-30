@@ -107,7 +107,7 @@
 
 [[snippets]]
   description = "echo x509 certificate from server by name"
-  command = "echo | openssl s_client -showcerts -servername <server=rancher.aspera.usu.grp> -connect <server>:443 2>/dev/null | openssl x509 -inform pem -noout -text"
+  command = "echo | openssl s_client -connect <server> 2>/dev/null | openssl x509 -text -noout"
   tag = ["openssl", "cert", "x509"]
   output = ""
 
@@ -163,8 +163,8 @@
 
 [[snippets]]
   description = "Run debugging container in current kubernetes context and namespace"
-  command = "kubectl run --rm -it sak --image=leodotcloud/swiss-army-knife -- bash"
-  tag = ["debug,swiss-army-knife,kubectl,run"]
+  command = "kubectl run --rm -it netshoot --image=nicolaka/netshoot -- bash"
+  tag = ["debug,network,netshoot,kubectl,run"]
   output = ""
 
 [[snippets]]
@@ -186,11 +186,6 @@
   description = "Add velero backup-volumes annotation to all pods of a specific label"
   command = "kubectl annotate pod -n rocketchat --selector=release=rocketchat,app=mongodb backup.velero.io/backup-volumes=datadir --overwrite"
   tag = ["velero,backup,volume,annotate,kubectl"]
-  output = ""
-
-[[snippets]]
-  description = "get TLS certificate of server through openssl"
-  command = "echo | openssl s_client -showcerts -servername asp.k8s.aspera.usu.grp:443 -connect asp.k8s.aspera.usu.grp:443 2>/dev/null | openssl x509 -inform pem -noout -text"
   output = ""
 
 [[snippets]]
@@ -296,3 +291,9 @@
   command = "kubectl delete `kubectl get <type> -o name | grep <filter> | tr '\\n' ' '`"
   tag = ["kubectl", "delete", "bulk"]
   output = ""
+
+[[snippets]]
+  description = "remove all evicted pods"
+  command = "k get pods  | grep Evicted | awk '{print $1}' | xargs kubectl delete pod"
+  output = ""
+

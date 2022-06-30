@@ -105,6 +105,7 @@ hash -d s=~/git/stuff
 hash -d heap=~/git/stuff/_heap
 hash -d ws=~/git/stuff/_heap/workspaces
 hash -d dump=~/git/stuff/_heap/_dump
+hash -d cws=~/code-workspaces
 
 hash -d st=~/git/smarttrack
 hash -d sta=~/git/smarttrack/app
@@ -124,6 +125,7 @@ hash -d dl=~/Downloads
 # completion
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+source <(stern --completion zsh)
 # source '/home/adihfalk/lib/azure-cli/az.completion'
 # source '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'
 source /usr/share/fzf/key-bindings.zsh
