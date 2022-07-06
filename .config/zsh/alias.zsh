@@ -5,10 +5,10 @@
 alias dots="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias dotpush="dots commit -am \"update\" && dots push"
 alias dotdiff="dots difftool"
-alias sid="~sid/sid"
 alias -g LS='| tr "\n" " "'
 alias -g NEAT='| kubectl neat'
 alias -g DO='-o yaml --dry-run=client'
+alias code='code-insiders --remote wsl+Ubuntu'
 compdef dotfiles=git
 
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
