@@ -1,156 +1,139 @@
-###########
-#  ZSHRC  #
-###########
-export ZSH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$ZSH_CONFIG/custom"
+# proxy first
+export http_proxy="http://proxy.intern.inform-software.com:80/"
+export https_proxy="http://proxy.intern.inform-software.com:80/"
+export no_proxy="localhost,.intern.inform-software.com,*.intern.inform-software.com,.inform-software.com,*.inform-software.com,.inform-ac.com,127.0.0.1,192.168.49.2,internal.inform-cloud.io"
+export HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy NO_PROXY=$no_proxy
 
-ZSH_THEME="random"
-if [[ -d $ZSH_CUSTOM/themes/powerlevel10k ]]; then
-    ZSH_THEME="powerlevel10k/powerlevel10k"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CONFIG="$HOME/.config/zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-syntax-highlighting
-  zsh-completions
-  zsh-autosuggestions
+  #zsh-syntax-highlighting
+  #zsh-autosuggestions
   git
   kubectl
   web-search
   bgnotify
   asdf
   pyenv
+  aws
+  fzf
 )
+# not working as plugin see:   https://github.com/zsh-users/zsh-completions#oh-my-zsh
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-# Remove plugins if in tty
-[[ "$TERM" = 'linux' ]] \
-    && plugins=("${(@)plugins:#zsh-autosuggestions}")
+# add fzf tab completion for aws:
+source $HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+# only aws command completion
+zstyle ':completion:*:*:aws' fzf-search-display true
 
-# additional engines need to be loaded before oh-my-zsh is sourced
-ZSH_WEB_SEARCH_ENGINES=(
-    reddit "https://www.reddit.com/search/?q="
-    amazon "https://www.amazon.de/s?k="
-)
+source $ZSH/oh-my-zsh.sh
 
-# Completions
-[[ -f "$ZSH_CONFIG/completion.zsh" ]] \
-    && source "$ZSH_CONFIG/completion.zsh"
-
-# Oh-My-Zsh
-[[ -f "$ZSH/oh-my-zsh.sh" ]] \
-    && source "$ZSH/oh-my-zsh.sh"
-
-# p10k
-[[ -f $HOME/.p10k.zsh ]] \
-    && source "$HOME/.p10k.zsh"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ########################
 #  USER CONFIGURATION  #
 ########################
 
-# set -o vi
-export EDITOR='vim'
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
-
-if [ -d ~/.kube/configs ]; then
-  if [ -z "$KUBECONFIG_OVERRIDE" ]; then
-    export KUBECONFIG=~/.kube/config$(find ~/.kube/configs -type f,l 2>/dev/null | xargs -I % echo -n ":%") 
-  else 
-    export KUBECONFIG=$KUBECONFIG_OVERRIDE
-  fi
-fi
-
-# kubeconfig per session & init with context of last session if available
-KUBECONFIG_LAST_CTX=`ls -t /tmp | grep kubectx | head -n 1`
-KUBECONFIG_NEXT_CTX="$(mktemp -t "kubectx.XXXXXX")"
-export KUBECONFIG="${KUBECONFIG_NEXT_CTX}:${KUBECONFIG}"
-if [ -z "$KUBECONFIG_LAST_CTX" ]
-then
-     cat <<EOF >"${KUBECONFIG_NEXT_CTX}"
-apiVersion: v1
-kind: Config
-current-context: ""
-EOF
-else
-  cp "/tmp/${KUBECONFIG_LAST_CTX}" "${KUBECONFIG_NEXT_CTX}"
-fi
-
-# Aliases
-[[ -f "$ZSH_CONFIG/alias.zsh" ]] \
-    && source "$ZSH_CONFIG/alias.zsh"
-
-
-# pet
-function prev() {
-  PREV=$(fc -lrn | head -n 1)
-  sh -c "pet new `printf %q "$PREV"`"
-}
-
-function pet-select() {
-  BUFFER=$(pet search --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle redisplay
-}
-zle -N pet-select
-# [[ $- = *i* ]] && stty -ixon
-bindkey '^s' pet-select
-
-# dir hashes
-hash -d g=~/git
-
-hash -d a=~/git/ansible
-
-hash -d s=~/git/stuff
-hash -d heap=~/git/stuff/_heap
-hash -d ws=~/git/stuff/_heap/workspaces
-hash -d dump=~/git/stuff/_heap/_dump
-hash -d cws=~/code-workspaces
-
-hash -d st=~/git/smarttrack
-hash -d sta=~/git/smarttrack/app
-hash -d sid=~/git/smarttrack/compose
-hash -d sth=~/git/smarttrack-helm-charts
-
-hash -d adp=~/git/adp
-hash -d adpf=~/git/adp/frontend
-hash -d adpb=~/git/adp/backend
-hash -d adph=~/git/adp/helm-chart
-
-hash -d pg=~/playground
-hash -d ng=~/playground/angular
-
-hash -d dl=~/Downloads
-
-# completion
-source <(kubectl completion zsh)
-source <(helm completion zsh)
-source <(stern --completion zsh)
-# source '/home/adihfalk/lib/azure-cli/az.completion'
-# source '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-
 # exports
+export EDITOR='vim'
 export PATH=$PATH:/home/adihfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# TMUX
-local main_attached="$(tmux list-sessions -F '#S #{session_attached}' \
-    2>/dev/null \
-    | sed -n 's/^main[[:space:]]//p')"
-if [[ "$main_attached" -le '0' ]] && [[ "$TERM" != 'linux' ]] && [[ ! "${TERMINAL_EMULATOR}" =~ .*JetBrains.* ]]; then
-    tmux new -A -s main >/dev/null 2>&1
-    exit
-fi
+# aliases
+[[ -f "$ZSH_CONFIG/alias.zsh" ]] \
+    && source "$ZSH_CONFIG/alias.zsh"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/adihfalk/google-cloud-sdk/path.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/path.zsh.inc'; fi
+# hashes
+[[ -f "$ZSH_CONFIG/hashes.zsh" ]] \
+    && source "$ZSH_CONFIG/hashes.zsh"
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/adihfalk/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/adihfalk/google-cloud-sdk/completion.zsh.inc'; fi
-export CLOUDSDK_PYTHON=/usr/bin/python2
+# kubeconfig
+[[ -f "$ZSH_CONFIG/kubeconfig.zsh" ]] \
+    && source "$ZSH_CONFIG/kubeconfig.zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# pet snippets
+[[ -f "$ZSH_CONFIG/pet.zsh" ]] \
+    && source "$ZSH_CONFIG/pet.zsh"
+
+# tmux
+[[ -f "$ZSH_CONFIG/pet.zsh" ]] \
+    && source "$ZSH_CONFIG/pet.zsh"
