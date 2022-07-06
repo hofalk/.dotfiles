@@ -1,6 +1,15 @@
 [user]
-	email = holger.falk@usu.com
+	signingkey = 1E29C64BF470722C
 	name = Holger Falk
+	email = holger.falk@inform-software.com
+[credential "https://github.com"]
+	helper =
+	helper = !/home/hfalk/.asdf/installs/github-cli/2.13.0/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/home/hfalk/.asdf/installs/github-cli/2.13.0/bin/gh auth git-credential
+[commit]
+	gpgsign = true
 [core]
 	autocrlf = input
 [diff]
