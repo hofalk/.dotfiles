@@ -117,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 export PATH=$PATH:/home/adihfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export GPG_TTY=$(tty)
 
 # aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
@@ -135,5 +136,5 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
     && source "$ZSH_CONFIG/pet.zsh"
 
 # tmux
-[[ -f "$ZSH_CONFIG/pet.zsh" ]] \
-    && source "$ZSH_CONFIG/pet.zsh"
+[[ -f "$ZSH_CONFIG/tmux.zsh" ]] \
+    && source "$ZSH_CONFIG/tmux.zsh"
