@@ -297,3 +297,22 @@
   command = "k get pods  | grep Evicted | awk '{print $1}' | xargs kubectl delete pod"
   output = ""
 
+[[snippets]]
+  description = "update or get aws eks kubeconfig for given cluster from active aws profile"
+  command = "aws eks update-kubeconfig --name <cluster-name> --alias <cluster-name> --kubeconfig ~/.kube/configs/<cluster-name>"
+  output = ""
+
+[[snippets]]
+  description = "clone all repositories from github using gh cli with a given user or organisation"
+  command = "gh repo list <org> --limit 1000 | while read -r repo _; do gh repo clone \"$repo\" \"${repo/<org>\\//}\" ; done"
+  output = ""
+
+[[snippets]]
+  description = "git pull in all folders directly beneath the current one"
+  command = "for dir in */; do (cd $dir && echo $(pwd) && git pull); done"
+  output = ""
+
+[[snippets]]
+  description = "get rate limits from github api by use of gh cli"
+  command = "gh api -H \"Accept: application/vnd.github.v3+json\" /rate_limit"
+  output = ""

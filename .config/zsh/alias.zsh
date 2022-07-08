@@ -11,6 +11,8 @@ alias -g DO='-o yaml --dry-run=client'
 alias code='code-insiders --remote wsl+Ubuntu'
 compdef dotfiles=git
 
+alias tfmt='terraform fmt -recursive'
+
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
