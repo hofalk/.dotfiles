@@ -278,7 +278,7 @@
 
 [[snippets]]
   description = "patch all applications and appprojects of argocd to remove finalizers and allowing for cluster or namespace termination through terraform destroy"
-  command = "k get application,appproject -o name | xargs -d '\\n' -n1 kubectl patch  -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
+  command = "kubectl get application,appproject -o name | xargs -d '\\n' -n1 kubectl patch  -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
   output = ""
 
 [[snippets]]
@@ -294,7 +294,7 @@
 
 [[snippets]]
   description = "remove all evicted pods"
-  command = "k get pods  | grep Evicted | awk '{print $1}' | xargs kubectl delete pod"
+  command = "kubectl get pods  | grep Evicted | awk '{print $1}' | xargs kubectl delete pod"
   output = ""
 
 [[snippets]]
@@ -315,4 +315,9 @@
 [[snippets]]
   description = "get rate limits from github api by use of gh cli"
   command = "gh api -H \"Accept: application/vnd.github.v3+json\" /rate_limit"
+  output = ""
+
+[[snippets]]
+  description = "remove finalizers from all resources in given namespace with help of kubectl patch"
+  command = "kubectl get-all -n <namespace> -o name | xargs kubectl patch -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
   output = ""

@@ -97,6 +97,8 @@ plugins=(
   fzf
   dotenv
   direnv
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 # not working as plugin see:   https://github.com/zsh-users/zsh-completions#oh-my-zsh
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
