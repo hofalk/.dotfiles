@@ -8,6 +8,7 @@ alias dotdiff="dots difftool"
 alias -g LS='| tr "\n" " "'
 alias -g NEAT='| kubectl neat'
 alias -g DO='-o yaml --dry-run=client'
+alias -g JWT="| jq -R 'split(\".\") | .[0],.[1] | @base64d | fromjson'"
 alias code='code-insiders --remote wsl+Ubuntu'
 compdef dotfiles=git
 
