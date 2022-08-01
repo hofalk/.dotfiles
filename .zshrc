@@ -4,6 +4,8 @@ if nc -w1 -z proxy.intern.inform-software.com 80 &> /dev/null; then
     export https_proxy="http://proxy.intern.inform-software.com:80/"
     export no_proxy="localhost,.intern.inform-software.com,*.intern.inform-software.com,.inform-software.com,*.inform-software.com,.inform-ac.com,127.0.0.1,192.168.49.2,.internal.inform-cloud.io"
     export HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy NO_PROXY=$no_proxy
+else
+    unset HTTP_PROXY http_proxy HTTPS_PROXY https_proxy NO_PROXY no_proxy
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
