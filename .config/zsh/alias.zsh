@@ -9,6 +9,9 @@ alias -g LS='| tr "\n" " "'
 alias -g NEAT='| kubectl neat'
 alias -g DO='-o yaml --dry-run=client'
 alias -g JWT="| jq -R 'split(\".\") | .[0],.[1] | @base64d | fromjson'"
+alias -g B64='| base64 -d'
+alias -g CSR='| openssl req -noout -text'
+alias -g CRT='| openssl x509 -noout -text'
 alias code='code-insiders --remote wsl+Ubuntu'
 compdef dotfiles=git
 
@@ -47,7 +50,8 @@ unalias ll
 ll() { LC_COLLATE=C ls "$@" }
 
 # suffix aliases
-alias -g CP='| xclip -selection clipboard -rmlastnl'
+alias -g CP='| clip.exe'
+# alias -g CP='| xclip -selection clipboard -rmlastnl'
 alias -g LL="| less"
 alias -g CA="| cat -A"
 alias -g KE="2>&1"
