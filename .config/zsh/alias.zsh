@@ -51,6 +51,7 @@ ll() { LC_COLLATE=C ls "$@" }
 
 # suffix aliases
 alias -g CP='| clip.exe'
+alias -g PA='powershell.exe -command "Get-Clipboard" | tr -d "\r"'
 # alias -g CP='| xclip -selection clipboard -rmlastnl'
 alias -g LL="| less"
 alias -g CA="| cat -A"
