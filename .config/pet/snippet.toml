@@ -321,3 +321,8 @@
   description = "remove finalizers from all resources in given namespace with help of kubectl patch"
   command = "kubectl get-all -n <namespace> -o name | xargs kubectl patch -p '{\"metadata\":{\"finalizers\":[]}}' --type merge"
   output = ""
+
+[[snippets]]
+  description = "get all active sealed secrets kubeseal keys from secrets inside cluster and store them base64 decoded to separate key files"
+  command = "for secretname in `kubectl get secrets -l=sealedsecrets.bitnami.com/sealed-secrets-key=active -o name`; do kubectl get $secretname -o yaml | yq '.data.\"tls.key\"' | base64 -d > ${secretname#secret/}.key ; done"
+  output = ""

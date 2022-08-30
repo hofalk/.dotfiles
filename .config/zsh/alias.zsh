@@ -22,6 +22,8 @@ function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
 
+alias petname="golang-petname"
+
 ### inherited:
 
 # go to parent
