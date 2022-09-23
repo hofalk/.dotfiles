@@ -92,6 +92,7 @@ plugins=(
   #zsh-syntax-highlighting
   #zsh-autosuggestions
   git
+  ssh-agent
   kubectl
   web-search
   bgnotify

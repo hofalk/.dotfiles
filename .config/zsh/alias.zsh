@@ -18,6 +18,8 @@ compdef dotfiles=git
 alias tf='terraform'
 alias tfmt='terraform fmt -recursive'
 
+alias krmcache='rm -r ~/.kube/cache/oidc-login'
+
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
