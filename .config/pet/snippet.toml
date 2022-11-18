@@ -326,3 +326,13 @@
   description = "get all active sealed secrets kubeseal keys from secrets inside cluster and store them base64 decoded to separate key files"
   command = "for secretname in `kubectl get secrets -l=sealedsecrets.bitnami.com/sealed-secrets-key=active -o name`; do kubectl get $secretname -o yaml | yq '.data.\"tls.key\"' | base64 -d > ${secretname#secret/}.key ; done"
   output = ""
+
+[[snippets]]
+  description = "git commit empty to retrigger checks on github"
+  command = "git commit -m \"retrigger checks\" --allow-empty"
+  output = ""
+
+[[snippets]]
+  description = "clone all new github repositories in inform-poc organisation through gh client"
+  command = "gh repo list inform-poc --no-archived --limit 1000 | while read -r repo _; do [ -d \"${repo/inform-poc\\//}\" ] && echo \"[SKIP] $repo\" || gh repo clone \"$repo\" \"${repo/inform-poc\\//}\"; done"
+  output = ""

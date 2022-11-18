@@ -24,6 +24,6 @@
   clean-branch = "!f() { git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -D $branch; done; }; f "
   pushu = !CURRENT=$(git branch --show-current) && git push origin $CURRENT
   currb = rev-parse --abbrev-ref HEAD
-  all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; f"
+  all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo  ===== {} ===== && git -C {}/../ $1\"; }; f"
   cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
   cmpu = "!f() { git add -A && git commit -m \"$@\" && git push origin $(git branch --show-current); }; f"

@@ -18,7 +18,10 @@ compdef dotfiles=git
 alias tf='terraform'
 alias tfmt='terraform fmt -recursive'
 
+alias kk='k9s'
 alias krmcache='rm -r ~/.kube/cache/oidc-login'
+
+alias avp='argocd-vault-plugin'
 
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }

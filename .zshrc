@@ -124,7 +124,7 @@ source $ZSH/oh-my-zsh.sh
 
 # exports
 export EDITOR='vim'
-export PATH=$PATH:/home/adihfalk/.bin
+export PATH=$PATH:/home/hfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export GPG_TTY=$(tty)
 
@@ -145,5 +145,5 @@ export GPG_TTY=$(tty)
     && source "$ZSH_CONFIG/pet.zsh"
 
 # tmux
-[[ -f "$ZSH_CONFIG/tmux.zsh" ]] \
+ [[ -f "$ZSH_CONFIG/tmux.zsh" ]] \
     && source "$ZSH_CONFIG/tmux.zsh"
