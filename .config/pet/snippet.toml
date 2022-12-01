@@ -304,8 +304,9 @@
 
 [[snippets]]
   description = "clone all repositories from github using gh cli with a given user or organisation"
-  command = "gh repo list <org> --limit 1000 | while read -r repo _; do gh repo clone \"$repo\" \"${repo/<org>\\//}\" ; done"
+  command = "gh repo list <org> --no-archived --limit 1000 | while read -r repo _; do [ -d \"${repo/<org>\\//}\" ] && echo \"[SKIP] $repo\" || gh repo clone \"$repo\" \"${repo/<org>\\//}\"; done"
   output = ""
+
 
 [[snippets]]
   description = "git pull in all folders directly beneath the current one"
@@ -333,6 +334,11 @@
   output = ""
 
 [[snippets]]
-  description = "clone all new github repositories in inform-poc organisation through gh client"
-  command = "gh repo list inform-poc --no-archived --limit 1000 | while read -r repo _; do [ -d \"${repo/inform-poc\\//}\" ] && echo \"[SKIP] $repo\" || gh repo clone \"$repo\" \"${repo/inform-poc\\//}\"; done"
+  description = "list nodes capacity for pods and the instance type with help of kubectl and custom columns"
+  command = "kubectl get nodes -o=custom-columns=NODE:.metadata.name,MAX_PODS:.status.allocatable.pods,CAPACITY_PODS:.status.capacity.pods,INSTANCE_TYPE:.metadata.labels.\"node\\.kubernetes\\.io/instance-type\""
+  output = ""
+
+[[snippets]]
+  description = "check number of non-terminated pods pre node with help of kubectl and awk"
+  command = "for node in $(k get nodes | awk '{if (NR!=1) {print $1}}'); do echo\"\"; echo \"Checking ${node}...\"; k describe node ${node} | grep \"Non-terminated\" ; done"
   output = ""
