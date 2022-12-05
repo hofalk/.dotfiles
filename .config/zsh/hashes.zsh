@@ -9,6 +9,7 @@ hash -d s=~/projects/stuff
 hash -d ws=~/projects/stuff/_heap/workspaces
 hash -d icpoc=~/projects/inform-poc
 hash -d icp=~/projects/inform-cloud-platform
+hash -d icpg=~/projects/inform-cloud-platform/_playground
 hash -d iclib=~/projects/inform-cloud-library
 hash -d docs=~/projects/inform-poc/docs-icp
 hash -d tpg=~/projects/inform-poc/_playground/tf

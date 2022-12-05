@@ -17,7 +17,7 @@ compdef dotfiles=git
 
 alias tf='terraform'
 alias tfmt='terraform fmt -recursive'
-alias tdocs'terraform-docs'
+alias tfdocs'terraform-docs'
 
 alias kk='k9s'
 alias krmcache='rm -r ~/.kube/cache/oidc-login'

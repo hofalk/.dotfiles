@@ -1,5 +1,5 @@
 [user]
-	signingkey = 1E29C64BF470722C
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGtV8pIFpbYwYXqV6vmdkAZQ7QT+35HMGhiIvYuCFvM4 holger.falk@inform-software.com
 	name = Holger Falk
 	email = holger.falk@inform-software.com
 [commit]
@@ -21,3 +21,5 @@
   all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo  ===== {} ===== && git -C {}/../ $1\"; }; f"
   cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
   cmpu = "!f() { git add -A && git commit -m \"$@\" && git push origin $(git branch --show-current); }; f"
+[gpg]
+	format = ssh
