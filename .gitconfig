@@ -21,5 +21,6 @@
   all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo  ===== {} ===== && git -C {}/../ $1\"; }; f"
   cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
   cmpu = "!f() { git add -A && git commit -m \"$@\" && git push origin $(git branch --show-current); }; f"
+  delbra ="!f() { git push origin --delete \"$@\" || git branch -D \"$@\"; }; f"
 [gpg]
 	format = ssh

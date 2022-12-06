@@ -137,7 +137,6 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 export PATH=$PATH:/home/hfalk/.bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export GPG_TTY=$(tty)
 
 # aliases
 [[ -f "$ZSH_CONFIG/alias.zsh" ]] \
