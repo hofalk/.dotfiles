@@ -3,13 +3,14 @@
 #############
 
 alias dots="/usr/bin/env git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias dotpush="dots commit -am \"update\" && dots push"
-alias dotdiff="dots difftool"
+alias dotsp="dots commit -am \"update\" && dots push"
+alias dotsd="dots difftool"
 alias -g LS='| tr "\n" " "'
 alias -g NEAT='| kubectl neat'
 alias -g DO='-o yaml --dry-run=client'
 alias -g JWT="| jq -R 'split(\".\") | .[0],.[1] | @base64d | fromjson'"
 alias -g B64='| base64 -d'
+alias -g URLD='| echo -e "${_//%/\\x}"'
 alias -g CSR='| openssl req -noout -text'
 alias -g CRT='| openssl x509 -noout -text'
 alias code='code-insiders --remote wsl+Ubuntu'
@@ -27,6 +28,7 @@ alias avp='argocd-vault-plugin'
 function delkh () { sed  -i -e "$1d" ~/.ssh/known_hosts }
 function mcd () { mkdir -p $1; cd $1 }
 function wsdir() { mkdir -p ~ws/$1; cd ~ws/$1 }
+function urldecode() { echo -e "$(sed 's/+/ /g;s/%\(..\)/\\x\1/g;')" }
 
 alias petname="golang-petname"
 

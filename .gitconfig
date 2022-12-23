@@ -6,8 +6,15 @@
 	gpgsign = true
 [core]
 	autocrlf = input
+	editor = code-insiders --wait --remote wsl+Ubuntu
 [diff]
-	tool = vimdiff
+  tool = vscode
+[merge]
+  tool = vscode
+[difftool "vscode"]  
+	cmd = code-insiders --remote wsl+Ubuntu --wait --diff $LOCAL $REMOTE
+[mergetool "vscode"]  
+	cmd = code-insiders --remote wsl+Ubuntu --wait $MERGED
 [difftool]
 	prompt = false
 [pull]
@@ -21,6 +28,7 @@
   all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo  ===== {} ===== && git -C {}/../ $1\"; }; f"
   cmp = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
   cmpu = "!f() { git add -A && git commit -m \"$@\" && git push origin $(git branch --show-current); }; f"
-  delbra ="!f() { git push origin --delete \"$@\" || git branch -D \"$@\"; }; f"
+  delbra ="!f() { git push origin --delete \"$@\" && git branch -D \"$@\"; }; f"
+  trigger ="!f() { git commit --allow-empty -m\"trigger\" && git pushu; }; f"
 [gpg]
 	format = ssh
